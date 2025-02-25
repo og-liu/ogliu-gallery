@@ -18,4 +18,9 @@ npm run build
 npm run build --report
 ```
 
+[
+'https://ogliu-images.oss-cn-guangzhou.aliyuncs.com/blog/20201228114246.png',
+'https://ogliu-images.oss-cn-guangzhou.aliyuncs.com/avatar/ogliu.jpg'
+]
+
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
