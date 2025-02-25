@@ -1,346 +1,303 @@
 <template>
-  <div class="download-container">
-    <!-- 主下载按钮 -->
-    <button class="download-btn" :disabled="processing" @click="startBulkDownload">
-      <template v-if="!processing">
-        下载全部图片 ({{ imageUrls.length }}张)
-      </template>
-      <template v-else>
-        处理中 {{ processedCount }}/{{ imageUrls.length }}
-      </template>
+  <div class="image-downloader">
+    <button class="download-all-btn" @click="handleDownloadAll">
+      下载全部图片 ({{ imageList.length }}张)
     </button>
 
-    <!-- iOS引导弹窗 -->
-    <div v-if="showIOSGuide" class="ios-guide">
-      <div class="guide-content">
-        <h3>保存指引</h3>
-        <p>请长按图片 → 点击「保存到相册」</p>
-        <div class="preview-wrap">
-          <img :src="currentPreview" alt="图片预览">
+    <!-- PC端图片列表弹窗 -->
+    <div v-if="showPcDialog" class="pc-dialog">
+      <div class="dialog-content">
+        <h3>选择要下载的图片</h3>
+        <div class="image-list">
+          <div v-for="(img, index) in imageList" :key="index" class="image-item">
+            <div class="preview">
+              <img :src="img.url" alt="预览" />
+            </div>
+            <div class="info">
+              <span class="name">{{ img.name }}</span>
+              <span class="size">{{ formatSize(img.size) }}</span>
+            </div>
+            <button class="download-btn" @click="downloadImage(img, index)">
+              ↓ 下载
+            </button>
+          </div>
         </div>
-        <div class="guide-footer">
-          <button @click="closeIOSGuide">取消</button>
-          <button @click="nextIOSImage">{{ isLastImage ? '完成' : '下一张' }}</button>
+        <div class="dialog-footer">
+          <button class="close-btn" @click="showPcDialog = false">关闭</button>
         </div>
       </div>
     </div>
 
-    <!-- 错误提示 -->
-    <div v-if="downloadError" class="error-tip">
-      {{ downloadError }}
-      <button @click="startBulkDownload">重试</button>
+    <!-- 移动端保存引导 -->
+    <div v-if="showMobileGuide" class="mobile-guide">
+      <div class="guide-content">
+        <div class="preview-wrap">
+          <img :src="currentImage.url" :alt="currentImage.name" />
+        </div>
+        <div class="tips">
+          <p>请长按图片选择「保存到相册」</p>
+          <p>({{ currentIndex + 1 }}/{{ imageList.length }})</p>
+        </div>
+        <div class="controls">
+          <button v-if="currentIndex > 0" @click="prevImage">上一张</button>
+          <button @click="nextImage">
+            {{ isLastImage ? '完成' : '下一张' }}
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-const BrowserCapability = {
-  isIOS: () => /iPad|iPhone|iPod/.test(navigator.userAgent),
-  isAndroid: () => /Android/.test(navigator.userAgent),
-  supportsDownload: () => typeof HTMLAnchorElement.prototype.download !== 'undefined'
-}
-
 export default {
-  name: 'BatchImageDownloader',
-
   props: {
-    imageUrls: {
+    imageList: {
       type: Array,
       required: true,
-      validator: urls => urls.every(url => typeof url === 'string' && url.startsWith('http'))
-    },
-    fileNamePrefix: {
-      type: String,
-      default: 'download'
+      validator: list =>
+        list.every(img => img.url && img.name && typeof img.size === 'number')
     }
   },
 
   data () {
     return {
-      processing: false,
-      processedCount: 0,
-      downloadError: null,
-      showIOSGuide: false,
-      currentPreview: null,
-      currentIndex: 0,
-      abortController: null
+      showPcDialog: false,
+      showMobileGuide: false,
+      currentIndex: 0
     }
   },
 
   computed: {
+    isMobile () {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    },
     isLastImage () {
-      return this.currentIndex === this.imageUrls.length - 1
+      return this.currentIndex === this.imageList.length - 1
+    },
+    currentImage () {
+      return this.imageList[this.currentIndex] || {}
     }
   },
 
   methods: {
-    // 主下载流程
-    async startBulkDownload () {
-      try {
-        this.resetState()
-        this.processing = true
-
-        if (BrowserCapability.isIOS()) {
-          await this.handleIOSDownload()
-        } else {
-          await this.handleNormalDownload()
-        }
-      } catch (error) {
-        this.handleError(error)
-      } finally {
-        this.processing = false
-      }
-    },
-
-    // iOS处理流程
-    async handleIOSDownload () {
-      this.showIOSGuide = true
-      this.currentIndex = 0
-      await this.showNextIOSImage()
-    },
-
-    async showNextIOSImage () {
-      if (this.currentIndex >= this.imageUrls.length) return
-
-      this.currentPreview = this.imageUrls[this.currentIndex]
-      await new Promise(resolve => setTimeout(resolve, 1000))
-    },
-
-    nextIOSImage () {
-      this.currentIndex += 1
-      if (this.currentIndex < this.imageUrls.length) {
-        this.showNextIOSImage()
+    async handleDownloadAll () {
+      if (this.isMobile) {
+        this.showMobileGuide = true
+        this.currentIndex = 0
       } else {
-        this.closeIOSGuide()
+        this.showPcDialog = true
       }
     },
 
-    closeIOSGuide () {
-      this.showIOSGuide = false
-      this.currentPreview = null
-      this.currentIndex = 0
-    },
-
-    // 常规下载处理
-    async handleNormalDownload () {
-      this.abortController = new AbortController()
-
+    async downloadImage (img, index) {
       try {
-        for (const [index, url] of this.imageUrls.entries()) {
-          await this.downloadWithBlob(url, index)
-          this.processedCount = index + 1
-        }
-      } catch (error) {
-        throw new Error(`下载失败: ${error.message}`)
-      }
-    },
-
-    // Blob下载核心方法
-    async downloadWithBlob (url, index) {
-      let blob = null
-      try {
-        const response = await fetch(url, {
-          mode: 'cors',
-          credentials: 'omit',
-          signal: this.abortController.signal
-        })
-
-        if (!response.ok) throw new Error(`HTTP ${response.status}`)
-
-        blob = await response.blob()
-        const objectURL = URL.createObjectURL(blob)
-
         const link = document.createElement('a')
-        link.href = objectURL
-        link.download = this.generateFileName(url, index)
-        link.style.display = 'none'
+        link.href = img.url
+        link.download = img.name
         document.body.appendChild(link)
         link.click()
-
-        // 清理资源
-        requestAnimationFrame(() => {
-          document.body.removeChild(link)
-          URL.revokeObjectURL(objectURL)
-        })
-
-        await this.delay(300) // 防止浏览器阻塞
+        document.body.removeChild(link)
       } catch (error) {
-        throw new Error(`第${index + 1}张下载失败: ${error.message}`)
+        console.error(`下载失败：${img.name}`, error)
       }
     },
 
-    // 工具方法
-    generateFileName (url, index) {
-      const extension = this.getFileExtension(url)
-      const basename = url.split('/').pop().split('.')[0] || this.fileNamePrefix
-      return `${this.sanitizeName(basename)}_${index + 1}.${extension}`
-    },
-
-    getFileExtension (url) {
-      const ext = url.split('.').pop().toLowerCase().replace(/[^a-z]/g, '')
-      return ['png', 'jpeg', 'jpg', 'gif', 'webp'].includes(ext) ? ext : 'jpg'
-    },
-
-    sanitizeName (name) {
-      return name
-        .replace(/[^a-zA-Z0-9\u4e00-\u9fa5]/g, '_')
-        .substring(0, 50)
-    },
-
-    delay (ms) {
-      return new Promise(resolve => setTimeout(resolve, ms))
-    },
-
-    resetState () {
-      this.processedCount = 0
-      this.downloadError = null
-      if (this.abortController) {
-        this.abortController.abort()
+    nextImage () {
+      if (this.currentIndex < this.imageList.length - 1) {
+        this.currentIndex++
+      } else {
+        this.showMobileGuide = false
       }
-      this.abortController = new AbortController()
     },
 
-    handleError (error) {
-      console.error('下载错误:', error)
-      this.downloadError = error.message || '下载过程中发生未知错误'
+    prevImage () {
+      if (this.currentIndex > 0) this.currentIndex--
+    },
+
+    formatSize (bytes) {
+      if (bytes === 0) return '0 B'
+      const k = 1024
+      const sizes = ['B', 'KB', 'MB', 'GB']
+      const i = Math.floor(Math.log(bytes) / Math.log(k))
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
     }
   }
 }
 </script>
 
-<style lang="less">
-@primary-color: #2196F3;
-@error-color: #ff5252;
-
-.download-container {
+<style lang="less" scoped>
+.image-downloader {
   position: relative;
-  max-width: 600px;
-  margin: 0 auto;
-}
 
-.download-btn {
-  padding: 12px 32px;
-  font-size: 16px;
-  background: @primary-color;
-  color: white;
-  border: none;
-  border-radius: 28px;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  font-weight: 500;
+  .download-all-btn {
+    padding: 12px 24px;
+    background: #409eff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
 
-  &:hover:not(:disabled) {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(@primary-color, 0.3);
+    &:hover {
+      background: #66b1ff;
+    }
   }
 
-  &:disabled {
-    background: #BDBDBD;
-    cursor: not-allowed;
-    box-shadow: none;
-  }
-}
+  .pc-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
 
-.ios-guide {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: fadeIn 0.3s;
+    .dialog-content {
+      background: white;
+      width: 80%;
+      max-width: 800px;
+      border-radius: 8px;
+      padding: 20px;
+      max-height: 80vh;
+      overflow: auto;
 
-  .guide-content {
-    background: white;
-    padding: 24px;
-    border-radius: 16px;
-    width: 90%;
-    max-width: 400px;
-
-    h3 {
-      margin: 0 0 16px;
-      font-size: 20px;
-      color: #212121;
-    }
-
-    p {
-      margin: 0 0 20px;
-      color: #757575;
-      font-size: 14px;
-    }
-
-    .preview-wrap {
-      margin: 16px 0;
-      img {
-        max-width: 100%;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      h3 {
+        margin: 0 0 20px;
+        color: #303133;
       }
-    }
 
-    .guide-footer {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
+      .image-list {
+        display: grid;
+        gap: 16px;
 
-      button {
-        padding: 8px 16px;
-        border: none;
-        border-radius: 20px;
-        font-size: 14px;
+        .image-item {
+          display: flex;
+          align-items: center;
+          padding: 12px;
+          border: 1px solid #ebeef5;
+          border-radius: 4px;
 
-        &:last-child {
-          background: @primary-color;
+          .preview {
+            width: 80px;
+            height: 80px;
+            margin-right: 16px;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+
+          .info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+            .name {
+              font-weight: 500;
+              margin-bottom: 4px;
+            }
+
+            .size {
+              color: #909399;
+              font-size: 0.9em;
+            }
+          }
+
+          .download-btn {
+            padding: 8px 16px;
+            background: #409eff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+
+            &:hover {
+              background: #66b1ff;
+            }
+          }
+        }
+      }
+
+      .dialog-footer {
+        margin-top: 20px;
+        text-align: right;
+
+        .close-btn {
+          padding: 8px 16px;
+          background: #909399;
           color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
         }
       }
     }
   }
-}
 
-.error-tip {
-  margin-top: 16px;
-  padding: 12px;
-  background: rgba(@error-color, 0.1);
-  border-radius: 8px;
-  color: @error-color;
-  font-size: 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  .mobile-guide {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  button {
-    background: @error-color;
-    color: white;
-    padding: 4px 12px;
-    border-radius: 16px;
-    font-size: 13px;
-    transition: opacity 0.2s;
+    .guide-content {
+      background: white;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 8px;
+      padding: 20px;
 
-    &:hover {
-      opacity: 0.9;
+      .preview-wrap {
+        margin: 16px 0;
+        img {
+          width: 100%;
+          max-height: 60vh;
+          object-fit: contain;
+          border-radius: 4px;
+        }
+      }
+
+      .tips {
+        text-align: center;
+        color: #606266;
+        margin: 12px 0;
+
+        p:first-child {
+          font-weight: 500;
+          margin-bottom: 4px;
+        }
+      }
+
+      .controls {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 16px;
+
+        button {
+          padding: 8px 20px;
+          border: none;
+          border-radius: 20px;
+          background: #409eff;
+          color: white;
+        }
+      }
     }
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@media (max-width: 480px) {
-  .download-btn {
-    width: 100%;
-    padding: 16px;
-    font-size: 15px;
-  }
-
-  .ios-guide .guide-content {
-    padding: 20px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <DownloadManager :image-urls="imageSource"/>
+    <DownloadManager :image-list="imageSource"/>
   </div>
 </template>
 
@@ -14,7 +14,8 @@ export default {
   data () {
     return {
       imageSource: [
-        '/static/logo.png'
+        { url: 'https://ogliu-images.oss-cn-guangzhou.aliyuncs.com/blog/20201228114246.png', name: '风景照', size: 2456789 },
+        { url: 'https://ogliu-images.oss-cn-guangzhou.aliyuncs.com/avatar/ogliu.jpg', name: '产品图', size: 1234567 }
       ]
     }
   }
