@@ -31,6 +31,10 @@
     <!-- 移动端保存引导 -->
     <div v-if="showMobileGuide" class="mobile-guide">
       <div class="guide-content">
+        <div class="info">
+          <span class="name">{{ currentImage.name }}</span>
+          <span class="size">{{ formatSize(currentImage.size) }}</span>
+        </div>
         <div class="preview-wrap">
           <img :src="currentImage.url" :alt="currentImage.name" />
         </div>
