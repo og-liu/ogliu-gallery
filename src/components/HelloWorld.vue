@@ -14,8 +14,7 @@ export default {
   data () {
     return {
       imageSource: [
-        'https://ogliu-images.oss-cn-guangzhou.aliyuncs.com/blog/20201228114246.png',
-        'https://ogliu-images.oss-cn-guangzhou.aliyuncs.com/avatar/ogliu.jpg'
+        '/static/logo.png'
       ]
     }
   }
