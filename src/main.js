@@ -4,6 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
+import { Carousel, CarouselItem } from 'element-ui'
+import 'element-ui/lib/theme-chalk/carousel.css'
+import 'element-ui/lib/theme-chalk/carousel-item.css'
+
+Vue.component('carousel', Carousel)
+Vue.component('carouselItem', CarouselItem)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
