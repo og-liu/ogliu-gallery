@@ -1,6 +1,6 @@
 <template>
   <div class="carous">
-    <carousel trigger="click" :autoplay="false" :loop="false">
+    <carousel trigger="click" :autoplay="false" :loop="false" indicator-position="outside" arrow="always">
       <carousel-item>
         <img src="/static/test1.png" alt="">
       </carousel-item>
