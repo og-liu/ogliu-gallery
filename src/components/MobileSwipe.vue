@@ -7,6 +7,9 @@
       <carousel-item>
         <img src="/static/test2.png" alt="">
       </carousel-item>
+      <carousel-item>
+        <img src="https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E5%8E%9F%E5%9B%BE.png?Expires=1740560586&OSSAccessKeyId=TMP.3KhtY1WRDvAW175Je91qYs1y8Whz35Wu4LKsBB6jL8WynGsXS724ZjASgAS2GPYCdFM99LcCBx4f3tEXoDDuhyD4eVjQCY&Signature=p9Z33hgixyE6UnDfRz479PIgORc%3D" alt="">
+      </carousel-item>
     </carousel>
   </div>
 </template>

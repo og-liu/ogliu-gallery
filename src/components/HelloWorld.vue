@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-<!--    <DownloadManager :image-list="imageSource"/>-->
+    <DownloadManager :image-list="imageSource"/>
   </div>
 </template>
 
