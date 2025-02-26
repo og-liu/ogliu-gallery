@@ -47,7 +47,7 @@ export default {
         },
         {
           id: 3,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E5%B0%81%E9%9D%A2%E5%9B%BE%E6%A8%A1%E6%9D%BF.png',
+          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E6%BA%90%E5%9B%BE.png',
           name: '人物特写',
           resolution: '1080x1440',
           size: '850KB',

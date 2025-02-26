@@ -22,6 +22,7 @@
     left: 0;
     right: 0;
     width: 100vw;
+    z-index: 9999;
     .left {
       .logo {
         display: flex;
