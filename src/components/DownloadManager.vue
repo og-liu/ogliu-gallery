@@ -15,7 +15,7 @@
             </div>
             <div class="info">
               <span class="name">{{ img.name }}</span>
-              <span class="size">{{ formatSize(img.size) }}</span>
+              <span class="size">{{ img.size }}</span>
             </div>
             <button class="download-btn" @click="downloadImage(img, index)">
               ↓ 下载
@@ -29,11 +29,11 @@
     </div>
 
     <!-- 移动端保存引导 -->
-    <div v-if="showMobileGuide" class="mobile-guide">
+    <div v-show="showMobileGuide" class="mobile-guide">
       <div class="guide-content">
         <div class="info">
           <span class="name">{{ currentImage.name }}</span>
-          <span class="size">{{ formatSize(currentImage.size) }}</span>
+          <span class="size">{{ currentImage.size }}</span>
         </div>
         <div class="preview-wrap">
           <img :src="currentImage.url" :alt="currentImage.name" />
@@ -45,7 +45,7 @@
         <div class="controls">
           <button v-if="currentIndex > 0" @click="prevImage">上一张</button>
           <button @click="nextImage">
-            {{ isLastImage ? '完成' : '下一张' }}
+            {{ isLastImage ? '返回' : '下一张' }}
           </button>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default {
       type: Array,
       required: true,
       validator: list =>
-        list.every(img => img.url && img.name && typeof img.size === 'number')
+        list.every(img => img.url && img.name && typeof img.size === 'string')
     }
   },
 
@@ -119,14 +119,6 @@ export default {
 
     prevImage () {
       if (this.currentIndex > 0) this.currentIndex--
-    },
-
-    formatSize (bytes) {
-      if (bytes === 0) return '0 B'
-      const k = 1024
-      const sizes = ['B', 'KB', 'MB', 'GB']
-      const i = Math.floor(Math.log(bytes) / Math.log(k))
-      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
     }
   }
 }
@@ -254,23 +246,19 @@ export default {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.9);
+    background: #FFF;
     z-index: 1000;
     display: flex;
-    align-items: center;
     justify-content: center;
 
     .guide-content {
-      background: white;
       width: 90%;
-      max-width: 400px;
-      border-radius: 8px;
       padding: 20px;
 
       .preview-wrap {
         margin: 16px 0;
         img {
-          width: 100%;
+          max-width: 100%;
           max-height: 60vh;
           object-fit: contain;
           border-radius: 4px;

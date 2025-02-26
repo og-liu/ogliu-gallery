@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <mobile-header></mobile-header>
-    <mobile-swipe></mobile-swipe>
+<!--    <mobile-swipe></mobile-swipe>-->
     <router-view/>
   </div>
 </template>
