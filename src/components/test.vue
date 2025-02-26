@@ -47,7 +47,7 @@ export default {
         },
         {
           id: 3,
-          src: 'https://i.pinimg.com/236x/59/b4/73/59b47396cd362cfb6c6da2aa8ed236fb.jpg',
+          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E5%B0%81%E9%9D%A2%E5%9B%BE%E6%A8%A1%E6%9D%BF.png',
           name: '人物特写',
           resolution: '1080x1440',
           size: '850KB',
@@ -56,7 +56,7 @@ export default {
         },
         {
           id: 4,
-          src: 'https://i.pinimg.com/236x/f9/80/dc/f980dc4fe9a4ea0e6064a46c52c41c7f.jpg',
+          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E6%89%8B%E6%9C%BA%E6%A8%A1%E6%9D%BF.png',
           name: 'Android 18',
           resolution: '1080x1920',
           size: '1.1MB',
