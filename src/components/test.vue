@@ -29,39 +29,21 @@ export default {
       images: [
         {
           id: 1,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E6%89%8B%E6%9C%BA%E5%B0%BA%E5%AF%B8.png',
-          name: '传统服饰',
-          resolution: '1080x1920',
-          size: '1.2MB',
+          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E5%B0%81%E9%9D%A2%E5%B0%BA%E5%AF%B8.png',
+          name: '封面尺寸',
+          resolution: '3496x4640',
+          size: '12.52 MB(13,125,095 Byte)',
           width: 1080,
           height: 1920
         },
         {
           id: 2,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E5%8E%9F%E5%9B%BE.png',
-          name: '樱花主题',
-          resolution: '1920x1080',
-          size: '980KB',
+          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E6%89%8B%E6%9C%BA%E5%B0%BA%E5%AF%B8.png',
+          name: '手机尺寸',
+          resolution: '2144x4640',
+          size: '8.73 MB(9,157,796 Byte)',
           width: 1920,
           height: 1080
-        },
-        {
-          id: 3,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E6%BA%90%E5%9B%BE.png',
-          name: '人物特写',
-          resolution: '1080x1440',
-          size: '850KB',
-          width: 1080,
-          height: 1440
-        },
-        {
-          id: 4,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E6%89%8B%E6%9C%BA%E6%A8%A1%E6%9D%BF.png',
-          name: 'Android 18',
-          resolution: '1080x1920',
-          size: '1.1MB',
-          width: 1080,
-          height: 1920
         }
       ]
     }
