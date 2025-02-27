@@ -3,7 +3,7 @@
     <div class="left">
       <div class="logo">
         <div class="avatar">
-          <img class="avatar-img" src="../assets/avatar.jpg">
+          <img class="avatar-img" src="https://oss.ogliu.net/avatar.jpg">
         </div>
         <div class="title">OG-LIU 图库</div>
         <div class="ver">v0.0.1</div>
