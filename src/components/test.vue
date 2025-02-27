@@ -30,7 +30,7 @@ export default {
         {
           id: 1,
           src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E5%B0%81%E9%9D%A2%E5%B0%BA%E5%AF%B8.png',
-          name: '封面尺寸',
+          name: '封面尺寸111',
           resolution: '3496x4640',
           size: '12.52 MB(13,125,095 Byte)',
           width: 1080,
