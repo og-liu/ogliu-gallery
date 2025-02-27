@@ -1,6 +1,5 @@
 <template>
   <div style="padding-top: 64px;">
-    <mobile-header></mobile-header>
     <div class="image-gallery">
       <div class="alert">
         <p><strong>提示：</strong>请长按图片选择「保存到相册」</p>
@@ -24,10 +23,8 @@
 </template>
 
 <script>
-import MobileHeader from '@/components/MobileHeader.vue'
 export default {
   name: 'ImageGallery',
-  components: { MobileHeader },
   data () {
     return {
       loadedImages: [],

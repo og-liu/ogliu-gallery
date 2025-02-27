@@ -1,12 +1,15 @@
 <template>
   <div id="app">
+    <mobile-header></mobile-header>
     <router-view/>
   </div>
 </template>
 
 <script>
+import MobileHeader from '@/components/MobileHeader.vue'
 export default {
-  name: 'App'
+  name: 'App',
+  components: { MobileHeader }
 }
 </script>
 
