@@ -6,6 +6,7 @@
           <img class="avatar-img" src="../assets/avatar.jpg">
         </div>
         <div class="title">OG-LIU 图库</div>
+        <div class="ver">v0.0.1</div>
       </div>
     </div>
     <div class="right">&nbsp;</div>
@@ -43,6 +44,12 @@
           padding-left: 12px;
           font-size: 16px;
           color: #333;
+        }
+        .ver {
+          font-size: 12px;
+          color: #666;
+          padding-left: 4px;
+          padding-top: 4px;
         }
       }
     }
