@@ -1,0 +1,44 @@
+name: Deploy ogliu.net
+
+on:
+  push:
+    branches: [ main ]  # 只在main分支push时触发
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest  # 使用 GitHub 托管的 Ubuntu 环境
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4  # 拉取仓库代码到工作区
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14.15.1  # 指定 Node 版本，与你的项目一致
+
+      - name: Install Dependencies
+        run: npm ci  # 使用 package-lock.json 安装依赖，更快更严格
+
+      - name: Build Project
+        run: npm run build  # 执行构建，生成 dist 文件夹
+
+      - name: Deploy to Aliyun Server
+        uses: appleboy/scp-action@v0.1.6  # 使用 SCP 上传文件
+        with:
+          host: ${{ secrets.SERVER_IP }}  # 注入服务器 IP
+          username: deployer  # 服务器部署用户
+          key: ${{ secrets.SERVER_SSH_KEY }}  # 注入私钥
+          source: "dist/"  # 本地构建后的文件夹
+          target: "/var/www/ogliu-gallery"  # 服务器目标路径
+          overwrite: true  # 强制覆盖旧文件
+
+      - name: Restart Nginx
+        uses: appleboy/ssh-action@v1.0.0  # 通过 SSH 执行命令
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: deployer
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            sudo systemctl restart nginx  # 重启 Nginx 使新配置生效
+            echo "Nginx已重启，部署完成！"
