@@ -1,18 +1,21 @@
 <template>
-  <div class="image-gallery">
-    <div class="alert">
-      <p><strong>提示：</strong>请长按图片选择「保存到相册」</p>
-    </div>
-    <div class="masonry-layout">
-      <div v-for="image in processedImages" :key="image.id" class="masonry-item">
-        <div class="image-card">
-          <div class="image-wrapper">
-            <img :src="image.src" :alt="image.name" @load="onImageLoad($event, image.id)" :style="{ opacity: loadedImages.includes(image.id) ? 1 : 0 }">
-          </div>
-          <div class="image-info">
-            <h3>{{ image.name }}</h3>
-            <p>{{ image.width + 'x' + image.height }}</p>
-            <p>{{ image.size }}</p>
+  <div style="padding-top: 64px;">
+    <mobile-header></mobile-header>
+    <div class="image-gallery">
+      <div class="alert">
+        <p><strong>提示：</strong>请长按图片选择「保存到相册」</p>
+      </div>
+      <div class="masonry-layout">
+        <div v-for="image in processedImages" :key="image.id" class="masonry-item">
+          <div class="image-card">
+            <div class="image-wrapper">
+              <img :src="image.src" :alt="image.name" @load="onImageLoad($event, image.id)" :style="{ opacity: loadedImages.includes(image.id) ? 1 : 0 }">
+            </div>
+            <div class="image-info">
+              <h3>{{ image.name }}</h3>
+              <p>{{ image.width + 'x' + image.height }}</p>
+              <p>{{ image.size }}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -21,8 +24,10 @@
 </template>
 
 <script>
+import MobileHeader from '@/components/MobileHeader.vue'
 export default {
   name: 'ImageGallery',
+  components: { MobileHeader },
   data () {
     return {
       loadedImages: [],

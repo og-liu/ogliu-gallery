@@ -44,6 +44,10 @@ export default {
   methods: {
     async verifyCode () {
       this.loading = true
+      setTimeout(() => {
+        this.loading = false
+        this.$router.push({path: '/gallery'})
+      }, 1000)
     }
   }
 }
