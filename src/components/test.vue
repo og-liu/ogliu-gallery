@@ -29,7 +29,7 @@ export default {
       images: [
         {
           id: 1,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E5%B0%81%E9%9D%A2%E5%B0%BA%E5%AF%B8.png',
+          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/S001/c586965173e97376df37033e963f74a9fdf1e65e9b28163fc54332457d649799.png',
           name: '封面尺寸',
           resolution: '3496x4640',
           size: '12.52 MB(13,125,095 Byte)',
@@ -38,12 +38,39 @@ export default {
         },
         {
           id: 2,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/A058/%E6%89%8B%E6%9C%BA%E5%B0%BA%E5%AF%B8.png',
+          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/S001/73231230841231232313.png',
           name: '手机尺寸',
           resolution: '2144x4640',
           size: '8.73 MB(9,157,796 Byte)',
           width: 1920,
           height: 1080
+        },
+        {
+          id: 1,
+          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/S001/83204323423750923790809.png',
+          name: '封面尺寸',
+          resolution: '3496x4640',
+          size: '12.52 MB(13,125,095 Byte)',
+          width: 1080,
+          height: 1920
+        },
+        {
+          id: 2,
+          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/S001/823490184098098.png',
+          name: '手机尺寸',
+          resolution: '2144x4640',
+          size: '8.73 MB(9,157,796 Byte)',
+          width: 1920,
+          height: 1080
+        },
+        {
+          id: 1,
+          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/S001/54076a9c7eae255f9be533ba710b22d78be5240989cf19f1e4a6106645804665.png',
+          name: '封面尺寸',
+          resolution: '3496x4640',
+          size: '12.52 MB(13,125,095 Byte)',
+          width: 1080,
+          height: 1920
         }
       ]
     }
