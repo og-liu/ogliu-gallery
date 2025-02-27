@@ -29,7 +29,7 @@ export default {
       images: [
         {
           id: 1,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/S001/c586965173e97376df37033e963f74a9fdf1e65e9b28163fc54332457d649799.png',
+          src: 'https://oss.ogliu.net/S001/54076a9c7eae255f9be533ba710b22d78be5240989cf19f1e4a6106645804665.png',
           name: '封面尺寸',
           resolution: '3496x4640',
           size: '12.52 MB(13,125,095 Byte)',
@@ -38,7 +38,7 @@ export default {
         },
         {
           id: 2,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/S001/73231230841231232313.png',
+          src: 'https://oss.ogliu.net/S001/73231230841231232313.png',
           name: '手机尺寸',
           resolution: '2144x4640',
           size: '8.73 MB(9,157,796 Byte)',
@@ -47,7 +47,7 @@ export default {
         },
         {
           id: 1,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/S001/83204323423750923790809.png',
+          src: 'https://oss.ogliu.net/S001/823490184098098.png',
           name: '封面尺寸',
           resolution: '3496x4640',
           size: '12.52 MB(13,125,095 Byte)',
@@ -56,7 +56,7 @@ export default {
         },
         {
           id: 2,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/S001/823490184098098.png',
+          src: 'https://oss.ogliu.net/S001/83204323423750923790809.png',
           name: '手机尺寸',
           resolution: '2144x4640',
           size: '8.73 MB(9,157,796 Byte)',
@@ -65,7 +65,7 @@ export default {
         },
         {
           id: 1,
-          src: 'https://ogliu-gallery.oss-cn-guangzhou.aliyuncs.com/S001/54076a9c7eae255f9be533ba710b22d78be5240989cf19f1e4a6106645804665.png',
+          src: 'https://oss.ogliu.net/S001/c586965173e97376df37033e963f74a9fdf1e65e9b28163fc54332457d649799.png',
           name: '封面尺寸',
           resolution: '3496x4640',
           size: '12.52 MB(13,125,095 Byte)',
