@@ -44,6 +44,13 @@ module.exports = {
   },
 
   build: {
+    // 添加cdn配置
+    cdn: {
+      js: [
+        'https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.min.js',
+        'https://cdn.jsdelivr.net/npm/vue-router@3.0.1/dist/vue-router.min.js'
+      ]
+    },
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
 
