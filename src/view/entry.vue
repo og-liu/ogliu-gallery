@@ -26,14 +26,12 @@
 </template>
 
 <script>
-import { KeyIcon, LoaderIcon, DownloadIcon } from 'vue-feather-icons'
+import { KeyIcon } from 'vue-feather-icons'
 
 export default {
   name: 'entry',
   components: {
-    KeyIcon,
-    LoaderIcon,
-    DownloadIcon
+    KeyIcon
   },
   data () {
     return {
