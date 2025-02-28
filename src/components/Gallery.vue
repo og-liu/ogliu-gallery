@@ -5,7 +5,7 @@
         <p><strong>提示：</strong>请长按图片选择「保存到相册」</p>
       </div>
       <div class="masonry-layout">
-        <div v-for="image in processedImages" :key="image.id" class="masonry-item">
+        <div v-for="(image, index) in processedImages" :key="index" class="masonry-item">
           <div class="image-card">
             <div class="image-wrapper">
               <img :src="image.src" :alt="image.name">
@@ -29,7 +29,6 @@ export default {
     return {
       images: [
         {
-          id: 1,
           src: 'https://oss.ogliu.net/S001/54076a9c7eae255f9be533ba710b22d78be5240989cf19f1e4a6106645804665.png',
           name: '四鸣人合集',
           size: '7.55 MB(7,917,747 Byte)',
@@ -37,7 +36,6 @@ export default {
           height: 4568
         },
         {
-          id: 2,
           src: 'https://oss.ogliu.net/S001/73231230841231232313.png',
           name: '吹风鸣人',
           size: '11.91 MB(12,486,822 Byte)',
@@ -45,7 +43,6 @@ export default {
           height: 5600
         },
         {
-          id: 3,
           src: 'https://oss.ogliu.net/S001/823490184098098.png',
           name: '草原鸣人',
           size: '8.12 MB(8,510,275 Byte)',
@@ -53,7 +50,6 @@ export default {
           height: 4568
         },
         {
-          id: 4,
           src: 'https://oss.ogliu.net/S001/83204323423750923790809.png',
           name: '九尾鸣人',
           size: '10.82 MB(11,345,970 Byte)',
@@ -61,7 +57,6 @@ export default {
           height: 5600
         },
         {
-          id: 5,
           src: 'https://oss.ogliu.net/S001/c586965173e97376df37033e963f74a9fdf1e65e9b28163fc54332457d649799.png',
           name: '符咒鸣人',
           size: '6.19 MB(6,490,869 Byte)',
