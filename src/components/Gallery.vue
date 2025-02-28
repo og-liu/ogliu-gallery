@@ -1,5 +1,5 @@
 <template>
-  <div style="padding-top: 64px;">
+  <div style="padding-top: 64px; height: calc(100vh - 64px)">
     <div class="image-gallery">
       <div class="alert">
         <p><strong>提示：</strong>请长按图片选择「保存到相册」</p>
@@ -29,39 +29,25 @@ export default {
     return {
       images: [
         {
-          src: 'https://oss.ogliu.net/S001/54076a9c7eae255f9be533ba710b22d78be5240989cf19f1e4a6106645804665.png',
-          name: '四鸣人合集',
-          size: '7.55 MB(7,917,747 Byte)',
-          width: 2560,
-          height: 4568
+          src: 'https://oss.ogliu.net/A062/%E6%89%8B%E6%9C%BA%E5%B0%BA%E5%AF%B8.png',
+          name: '手机尺寸(9:19.5)',
+          size: '6.43 MB(6,747,207 Byte)',
+          width: 2358,
+          height: 5104
         },
         {
-          src: 'https://oss.ogliu.net/S001/73231230841231232313.png',
-          name: '吹风鸣人',
-          size: '11.91 MB(12,486,822 Byte)',
+          src: 'https://oss.ogliu.net/A062/%E5%B0%81%E9%9D%A2%E5%B0%BA%E5%AF%B8.png',
+          name: '封面尺寸（3:4）',
+          size: '7.12 MB(7,464,393 Byte)',
           width: 3040,
           height: 5600
         },
         {
-          src: 'https://oss.ogliu.net/S001/823490184098098.png',
-          name: '草原鸣人',
-          size: '8.12 MB(8,510,275 Byte)',
-          width: 2560,
-          height: 4568
-        },
-        {
-          src: 'https://oss.ogliu.net/S001/83204323423750923790809.png',
-          name: '九尾鸣人',
-          size: '10.82 MB(11,345,970 Byte)',
-          width: 3040,
-          height: 5600
-        },
-        {
-          src: 'https://oss.ogliu.net/S001/c586965173e97376df37033e963f74a9fdf1e65e9b28163fc54332457d649799.png',
-          name: '符咒鸣人',
-          size: '6.19 MB(6,490,869 Byte)',
-          width: 2560,
-          height: 4568
+          src: 'https://oss.ogliu.net/A062/%E5%8E%9F%E5%9B%BE%E5%B0%BA%E5%AF%B8.png',
+          name: '原图(最大)尺寸',
+          size: '6.57 MB(6,886,160 Byte)',
+          width: 3456,
+          height: 5104
         }
       ]
     }
@@ -80,6 +66,7 @@ export default {
 
 <style scoped>
 .image-gallery {
+  height: 100%;
   padding: 12px;
   background-color: #f8f8f8;
 }

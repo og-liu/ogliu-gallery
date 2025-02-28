@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 // 修改为路由懒加载（动态导入）：
-const Entry = () => import(/* webpackChunkName: "Entry" */ '@/view/entry.vue')
+// const Entry = () => import(/* webpackChunkName: "Entry" */ '@/view/entry.vue')
 const Gallery = () => import(/* webpackChunkName: "Gallery" */ '@/components/Gallery.vue')
 
 // 对于特殊依赖的异步加载（可选）
@@ -15,13 +15,13 @@ const Gallery = () => import(/* webpackChunkName: "Gallery" */ '@/components/Gal
 
 export default new Router({
   routes: [
+    // {
+    //   path: '/',
+    //   name: 'entry',
+    //   component: Entry
+    // },
     {
       path: '/',
-      name: 'entry',
-      component: Entry
-    },
-    {
-      path: '/gallery',
       name: 'gallery',
       component: Gallery
     }
