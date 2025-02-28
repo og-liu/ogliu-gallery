@@ -2,14 +2,16 @@
   <div id="app">
     <mobile-header></mobile-header>
     <router-view/>
+    <mobile-footer></mobile-footer>
   </div>
 </template>
 
 <script>
 import MobileHeader from '@/components/MobileHeader.vue'
+import MobileFooter from '@/components/MobileFooter.vue'
 export default {
   name: 'App',
-  components: { MobileHeader }
+  components: { MobileHeader, MobileFooter }
 }
 </script>
 
@@ -20,6 +22,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+body {
+  background-color: #f8f8f8;
 }
 * {
   padding: 0;

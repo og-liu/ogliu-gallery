@@ -1,5 +1,5 @@
 <template>
-  <div style="padding-top: 64px; height: calc(100vh - 64px)">
+  <div style="padding-top: 64px; padding-bottom: 33px;">
     <div class="image-gallery">
       <div class="alert">
         <p><strong>提示：</strong>请长按图片选择「保存到相册」</p>
@@ -46,9 +46,7 @@ export default {
 
 <style scoped>
 .image-gallery {
-  height: 100%;
   padding: 12px;
-  background-color: #f8f8f8;
 }
 
 .alert {
