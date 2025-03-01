@@ -1,21 +1,12 @@
-# ogliu-gallery
+| 技术栈         | 版本          | 说明                                           |
+|----------------|---------------|----------------------------------------------|
+| Vue.js         | 2.5.2         | 响应式 JavaScript 框架，支持组件化开发和双向数据绑定             |
+| Less           | 3.13.1        | CSS 预处理器，支持变量、mixins、嵌套规则，提升 CSS 代码的可维护性和复用性 |
+| Vue-CLI        | 2.9.6         | Vue.js官方的脚手架工具，用于快速构建Vue项目，提供项目生成、依赖管理和构建工具链 |
 
-> A Vue.js project
+### 详细说明：
+- **Vue.js@2.5.2**: 这是一个稳定版本的Vue框架，支持响应式数据绑定、组件化开发和Vue生态系统中的各种插件。
+- **Less@3.13.1**: CSS预处理器，支持在CSS中使用变量、 mixins、继承和嵌套，提升CSS代码的复用性和可维护性。
+- **Vue-CLI@2.9.6**: 基于Vue生态体系的脚手架工具，提供零配置的构建和开发体验，支持生成项目的结构、依赖管理和构建优化。
 
-## Build Setup
-
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+建议在项目开发和维护过程中，记录各技术栈的依赖版本，并保持版本控制的一致性，以确保项目的兼容性和可维护性。
