@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <mobile-header></mobile-header>
+<!--    <mobile-header></mobile-header>-->
     <router-view/>
-    <mobile-footer></mobile-footer>
+<!--    <mobile-footer></mobile-footer>-->
   </div>
 </template>
 
@@ -29,5 +29,21 @@ body {
 * {
   padding: 0;
   margin: 0;
+}
+
+.img {
+  /* 禁用iOS/Android长按菜单 */
+  -webkit-touch-callout: none;
+  user-select: none;
+  pointer-events: none;
+  /* 防止拖拽触发 */
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+/* 覆盖默认图像消息样式 (Android Chrome的隐藏功能) */
+.img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
 }
 </style>
