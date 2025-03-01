@@ -21,9 +21,9 @@ export default {
           height: 4320
         },
         {
-          src: 'https://oss.ogliu.net/A035/%E6%89%8B%E6%9C%BA%E5%B0%BA%E5%AF%B8.png',
+          src: 'https://oss.ogliu.net/A035/%E6%89%8B%E6%9C%BA%E5%B0%BA%E5%AF%B8%EF%BC%88%E9%AB%98%E6%B8%85%E4%BF%AE%E5%A4%8D%E7%89%88%EF%BC%89.png',
           name: '手机尺寸(9:19.5)',
-          size: '6.91 MB(7,242,696 Byte)',
+          size: '12.27 MB(12,869,724 Byte)',
           width: 1958,
           height: 4320
         }
