@@ -4,7 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const image = () => import(/* webpackChunkName: "index" */ '@/components/image.vue')
-const imageViewer = () => import(/* webpackChunkName: "index" */ '@/components/imageViewer.vue')
+const imageViewer = () => import(/* webpackChunkName: "index" */ '@/components/ImageViewer.vue')
 const A034 = () => import(/* webpackChunkName: "index" */ '@/view/sku/A034.vue')
 const A035 = () => import(/* webpackChunkName: "index" */ '@/view/sku/A035.vue')
 const A056 = () => import(/* webpackChunkName: "index" */ '@/view/sku/A056.vue')
